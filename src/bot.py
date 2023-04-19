@@ -218,7 +218,11 @@ https://github.com/Zero6992/chatGPT-discord-bot""")
         app_commands.Choice(name="DUDE V3", value="dude_v3"),
         app_commands.Choice(name="AIM", value="aim"),
         app_commands.Choice(name="UCAR", value="ucar"),
-        app_commands.Choice(name="Jailbreak", value="jailbreak")
+        app_commands.Choice(name="Jailbreak", value="jailbreak"),
+        app_commands.Choice(name="miao~", value="miao~"),
+        app_commands.Choice(name="Doctor", value="Doctor"),
+        app_commands.Choice(name="Coder", value="Coder"),
+        app_commands.Choice(name="dl", value="dl"),
     ])
     async def switchpersona(interaction: discord.Interaction, persona: app_commands.Choice[str]):
         if interaction.user == client.user:

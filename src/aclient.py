@@ -51,8 +51,12 @@ class aclient(discord.Client):
             return EdgeChatbot(cookiePath='./cookies.json')
 
     async def send_message(self, message, user_message):
+        # replying_all是一个flag，如果为False，则不使用/chat命令也可以进行回复
         if self.is_replying_all == "False":
+            # 此时的message是一个Interaction
             author = message.user.id
+            # ephemeral参数表明是否只有发消息的人能看到
+            # defer函数将在bot进行交互的时候将bot的状态设置为正在思考。。。。
             await message.response.defer(ephemeral=self.isPrivate)
         else:
             author = message.author.id
@@ -115,7 +119,8 @@ class aclient(discord.Client):
                             await message.channel.send(chunk)
                         else:
                             await message.followup.send(chunk)
-            elif self.is_replying_all == "True":
+
+            if self.is_replying_all == "True":
                 await message.channel.send(response)
             else:
                 await message.followup.send(response)
@@ -127,7 +132,6 @@ class aclient(discord.Client):
             logger.exception(f"Error while sending message: {e}")
 
     async def send_start_prompt(self):
-        import os.path
 
         config_dir = os.path.abspath(f"{__file__}/../../")
         prompt_name = 'system_prompt.txt'
